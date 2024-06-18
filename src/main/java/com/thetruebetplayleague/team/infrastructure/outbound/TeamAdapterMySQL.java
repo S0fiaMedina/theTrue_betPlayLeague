@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thetruebetplayleague.config.AppSettings;
+
 import com.thetruebetplayleague.team.domain.model.Team;
 import com.thetruebetplayleague.team.domain.repository.TeamDAO;
 
@@ -32,7 +32,22 @@ public class TeamAdapterMySQL  implements TeamDAO{
 
     @Override
     public List<Team> findAll() {
-
+        
+        try (Connection c = DriverManager.getConnection(url, user, pass)){
+            List<Team> teams = new ArrayList<>();
+            String query = "SELECT id, name  FROM team";
+            try (PreparedStatement ps = c.prepareStatement(query)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()){
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    teams.add(new Team(id, query));
+                    System.out.println("El equipo es: " + id + " " + name);
+                }
+            } 
+        } catch (Exception e) {
+            System.out.println("se ha producido un error ;(. Motivo: \n");
+        }
         return null;
     }
 
