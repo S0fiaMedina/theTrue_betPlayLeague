@@ -12,7 +12,7 @@ public class TeamService {
     
     public TeamService(TeamDAO teamDAO){
         this.teamRepository = teamDAO;
-        this.createNewTeamUserCase = new CreateNewTeamUserCase();
+        this.createNewTeamUserCase = new CreateNewTeamUserCase(this.teamRepository);
     }
 
     public void createNewTeam(TeamDTO teamDTO){

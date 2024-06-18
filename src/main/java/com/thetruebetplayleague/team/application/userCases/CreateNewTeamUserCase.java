@@ -7,14 +7,14 @@ import com.thetruebetplayleague.team.domain.repository.TeamDAO;
 public class CreateNewTeamUserCase {
     TeamDAO teamDAO;
 
-    public CreateNewTeamUserCase(){
-
+    public CreateNewTeamUserCase(TeamDAO teamDAO){
+        this.teamDAO = teamDAO;
     }
 
 
     public void createTeam(TeamDTO teamDTO){
         Team team = TeamDTO.toDomainModel(teamDTO);
-        System.out.println(team.getName() + " "+ team.getId());
+        this.teamDAO.save(team);
         
     }
 }

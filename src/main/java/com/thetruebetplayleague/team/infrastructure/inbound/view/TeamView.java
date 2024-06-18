@@ -18,7 +18,7 @@ public class TeamView {
     }
     
     public String getName(){
-        return Utileria.getStringInput("Digite el nombre del equipo \n>> ");
+        return Utileria.getStringInput(">> Digite el nombre del equipo: ");
     }
 
     
