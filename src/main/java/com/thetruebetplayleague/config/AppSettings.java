@@ -3,7 +3,6 @@ package com.thetruebetplayleague.config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Optional;
 
 import com.thetruebetplayleague.team.domain.repository.TeamDAO;
 import com.thetruebetplayleague.team.infrastructure.outbound.TeamAdapterMySQL;

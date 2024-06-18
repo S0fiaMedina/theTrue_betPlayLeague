@@ -1,4 +1,4 @@
-package com.thetruebetplayleague.team.infrastructure.external;
+package com.thetruebetplayleague.config;
 
 
 import java.util.ArrayList;

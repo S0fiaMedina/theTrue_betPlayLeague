@@ -1,6 +1,6 @@
 package com.thetruebetplayleague.team.infrastructure.inbound.view;
 
-import com.thetruebetplayleague.team.infrastructure.external.Utileria;
+import com.thetruebetplayleague.config.Utileria;
 
 public class TeamView {
     
