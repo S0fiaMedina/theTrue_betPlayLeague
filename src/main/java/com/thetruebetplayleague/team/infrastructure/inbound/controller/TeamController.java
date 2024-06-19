@@ -24,6 +24,7 @@ public class TeamController {
     
     public void run(){
         int option = teamView.menuTeam();
+        Team team = null;
         switch(option){
             case 1: // crear equipo
                 String name = teamView.getName();
@@ -32,17 +33,20 @@ public class TeamController {
                 break;
 
             case 2: // ver equipos con mas puntos
-                Team team = teamService.getTeamWithMostPoints();
+                team = teamService.getTeamWithMostPoints();
                 teamView.showTeamWithMostPoints(team);
-                
                 break;
+
             case 3: // equipo con mas goles
+                team = teamService.getTeamWithMostGoals();
+                teamView.showTeamWithMostGoalsScored(team);
                 break;
             
             case 4: // equipo con mas partidos ganados
+                team = teamService.getTeamWithMostWonGames();
+                teamView.showTeamWithMostWonGames(team);
                 break;
 
-            
             case 5:
                 int totalGoals = teamService.getTotalOfGoals();
                 teamView.showSumOfGoals(totalGoals);

@@ -1,32 +1,35 @@
 package com.thetruebetplayleague.teamMember.domain.model;
 
 public class TeamMember {
-    private long id;
+    private int id;
     private int TeamId;
     private String name;
     private String lastName;
-  
-
-    private String countryId;
+    private int countryId;
     private String rol;
 
     public TeamMember(){
 
     }
 
-    public TeamMember(int id, int teamId, String name, String countryId, String rol) {
+    
+
+    public TeamMember(int id, int teamId, String name, String lastName, int countryId, String rol) {
         this.id = id;
         TeamId = teamId;
         this.name = name;
+        this.lastName = lastName;
         this.countryId = countryId;
         this.rol = rol;
     }
 
-    public long getId() {
+
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -54,11 +57,11 @@ public class TeamMember {
         this.lastName = lastName;
     }
 
-    public String getCountryId() {
+    public int getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(String countryId) {
+    public void setCountryId(int countryId) {
         this.countryId = countryId;
     }
 
@@ -69,8 +72,16 @@ public class TeamMember {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
 
+
+
+    @Override
+    public String toString() {
+        return "TeamMember [id=" + id + ", TeamId=" + TeamId + ", name=" + name + ", lastName=" + lastName
+                + ", countryId=" + countryId + ", rol=" + rol + "]";
+    }
+    
+    
    
     
 

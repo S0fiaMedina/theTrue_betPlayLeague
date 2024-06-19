@@ -44,11 +44,11 @@ public class TeamView {
     }
 
     public void showTeamWithMostGoalsScored(Team team){
-        Utileria.mostrarInforme("El equipo con mas goles anotados es: " + team.getName() + " con un total de " + team.getScoredGoals() + " puntos.");
+        Utileria.mostrarInforme("El equipo con mas goles anotados es: " + team.getName() + " con un total de " + team.getScoredGoals() + " goles.");
     }
 
     public void showTeamWithMostWonGames(Team team){
-        Utileria.mostrarInforme("El equipo con mas partidos ganados es: " + team.getName() + " con un total de " + team.getWonGames() + " puntos.");
+        Utileria.mostrarInforme("El equipo con mas partidos ganados es: " + team.getName() + " con un total de " + team.getWonGames() + " partidos ganados.");
     }
 
 

@@ -1,19 +1,25 @@
 package com.thetruebetplayleague.teamMember.application.dto;
 
-public class teamMemberDTO {
+import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
+
+public class TeamMemberDTO {
     private int id;
+    private int teamId;
     private String name;
     private String lastName;
-    private String nationality;
+    private int nationality;
     private String rol;
 
-    public teamMemberDTO(int id, String name, String lastName, String nationality, String rol) {
+    public TeamMemberDTO(int id, int teamId, String name,  String lastName, int nationality, String rol) {
         this.id = id;
+        this.teamId = teamId;
         this.name = name;
         this.lastName = lastName;
         this.nationality = nationality;
         this.rol = rol;
     }
+
+    
 
     public int getId() {
         return id;
@@ -39,11 +45,11 @@ public class teamMemberDTO {
         this.lastName = lastName;
     }
 
-    public String getNationality() {
+    public int getNationality() {
         return nationality;
     }
 
-    public void setNationality(String nationality) {
+    public void setNationality(int nationality) {
         this.nationality = nationality;
     }
 
@@ -54,6 +60,24 @@ public class teamMemberDTO {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    public int getIdTeam() {
+        return teamId;
+    }
+
+
+
+    public void setIdTeam(int teamId) {
+        this.teamId = teamId;
+    }
+
+    public static TeamMember toDomainModel(TeamMemberDTO teamMemberDTO){
+        return new TeamMember(teamMemberDTO.getId(), teamMemberDTO.getIdTeam(), teamMemberDTO.getName(), teamMemberDTO.getLastName(), teamMemberDTO.getNationality(),  teamMemberDTO.getRol());
+        
+    }
+
+
+
 
     
 

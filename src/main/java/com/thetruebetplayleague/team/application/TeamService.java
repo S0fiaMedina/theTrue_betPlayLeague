@@ -24,8 +24,17 @@ public class TeamService {
         createNewTeamUserCase.createTeam(teamDTO);
     }
 
+    // informes
     public Team getTeamWithMostPoints(){
         return this.statsManager.getTeamWithMostPoints();
+    }
+
+    public Team getTeamWithMostGoals(){
+        return this.statsManager.getTeamWithMostGoalsScored();
+    }
+
+    public Team getTeamWithMostWonGames(){
+        return this.statsManager.getTeamWithMostWonGames();
     }
 
     public int getTotalOfGoals(){

@@ -46,7 +46,7 @@ public class TeamAdapterStatsMySQL  implements StatsTeamRepository{
     public Team getTeamWithMostPoints(){
         Team teamWithMostPoints = null;
         try (Connection c = DriverManager.getConnection(url, user, pass)){
-            String query = "SELECT name, totalOfPoints FROM team ORDER BY totalOfPoints DESC";
+            String query = "SELECT name, totalOfPoints FROM team ORDER BY totalOfPoints DESC LIMIT 1";
             try (PreparedStatement ps = c.prepareStatement(query)) {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
@@ -63,13 +63,41 @@ public class TeamAdapterStatsMySQL  implements StatsTeamRepository{
 
     @Override
     public Team getTeamWithMostGoalsScored(){
-        return null;
+        Team teamWithMostGoalsScored = null;
+        try (Connection c = DriverManager.getConnection(url, user, pass)){
+            String query = "SELECT name, scoredGoals FROM team ORDER BY scoredGoals DESC LIMIT 1";
+            try (PreparedStatement ps = c.prepareStatement(query)) {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    teamWithMostGoalsScored = new Team();
+                    teamWithMostGoalsScored.setName(rs.getString("name"));
+                    teamWithMostGoalsScored.setScoredGoals(rs.getInt("scoredGoals"));
+                }
+            } 
+        } catch (Exception e) {
+            System.out.println("se ha producido un error ;(. Motivo: \n" + e.getMessage());
+        }
+        return teamWithMostGoalsScored;
 
     }
 
     @Override
     public Team getTeamWithMostWonGames(){
-        return null;
+        Team teamWithMostWonGames = null;
+        try (Connection c = DriverManager.getConnection(url, user, pass)){
+            String query = "SELECT name, wonGames FROM team ORDER BY wonGames DESC LIMIT 1";
+            try (PreparedStatement ps = c.prepareStatement(query)) {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    teamWithMostWonGames = new Team();
+                    teamWithMostWonGames.setName(rs.getString("name"));
+                    teamWithMostWonGames.setWonGames(rs.getInt("wonGames"));
+                }
+            } 
+        } catch (Exception e) {
+            System.out.println("se ha producido un error ;(. Motivo: \n" + e.getMessage());
+        }
+        return teamWithMostWonGames;
 
     }
 
