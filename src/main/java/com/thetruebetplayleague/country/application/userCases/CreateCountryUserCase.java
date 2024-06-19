@@ -14,6 +14,6 @@ public class CreateCountryUserCase {
     public void createNewCountry(CountryDTO countryDTO){
         Country country = CountryDTO.toDomainModel(countryDTO);
         System.out.println("Has creado un pais cuyo nombre es: " + country.getName());
-        // countryRepository.save(country);
+        countryRepository.save(country);
     }
 }

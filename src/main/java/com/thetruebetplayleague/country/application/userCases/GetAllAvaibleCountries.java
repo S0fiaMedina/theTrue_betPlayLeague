@@ -12,7 +12,7 @@ public class GetAllAvaibleCountries {
         this.countryRepository = countryRepository;
     }
 
-    public List<Country> getAllCountries(){
+    public List<Country> getTheCountries(){
         return this.countryRepository.findAll();
     }
 

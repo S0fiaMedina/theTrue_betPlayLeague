@@ -9,6 +9,7 @@ public class Team {
     private int tiedGames;
     private int scoredGoals;
     private int goalsConceded;
+    private int totalOfPoints;
 
     // Constructor vacío (por defecto)
     public Team() {
@@ -18,6 +19,7 @@ public class Team {
         this.tiedGames = 0;
         this.scoredGoals = 0;
         this.goalsConceded = 0;
+
     }
 
     // Constructor con todos los atributos
@@ -93,6 +95,14 @@ public class Team {
         this.goalsConceded = goalsConceded;
     }
 
+    public int getTotalOfPoints() {
+        return this.totalOfPoints;
+    }
+
+    public void setTotalOfPoints(int totalOfPoints) {
+        this.totalOfPoints = totalOfPoints;
+    }
+
     // Método toString para representar el objeto como cadena de texto
     @Override
     public String toString() {
@@ -107,6 +117,8 @@ public class Team {
                 ", goalsConceded=" + goalsConceded +
                 '}';
     }
+
+
 }
 
 

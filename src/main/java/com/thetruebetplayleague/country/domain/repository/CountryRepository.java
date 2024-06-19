@@ -1,11 +1,12 @@
 package com.thetruebetplayleague.country.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.thetruebetplayleague.country.domain.model.Country;
 
 public interface CountryRepository {
-    public Country findById(int id);
+    public Optional<Country> findById(int id);
 
     public List<Country> findAll();
 

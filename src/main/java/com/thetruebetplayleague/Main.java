@@ -2,23 +2,41 @@ package com.thetruebetplayleague;
 
 
 import com.thetruebetplayleague.config.AppSettings;
+import com.thetruebetplayleague.config.Utileria;
 import com.thetruebetplayleague.country.infrastructure.inbound.controller.CountryController;
 import com.thetruebetplayleague.team.infrastructure.inbound.controller.TeamController;
 
 public class Main {
     public static void main(String[] args) {
-        
-        System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║                                        ║");
-        System.out.println("║           Liga Betplay Dimayor         ║");
-        System.out.println("║                                        ║");
-        System.out.println("╚════════════════════════════════════════╝");
-        //TeamController teamController = new TeamController(AppSettings.starTeamRepository());
-        //teamController.run();
+        // inicializar controladores
+        AppSettings appSettings = new AppSettings();
+        TeamController teamController = appSettings.startTeamModule();
+        CountryController countryController = appSettings.startCountryModule();
 
-        CountryController countryController = new CountryController(null);
-        countryController.run();
+        String[] options = {"Equipos", "Integrantes de equipo", "Tabla de posiciones", "Salir"};
+        boolean flag = true;
 
-        
+        while (flag) {
+            System.out.println("╔════════════════════════════════════════╗");
+            System.out.println("║                                        ║");
+            System.out.println("║           Liga Betplay Dimayor         ║");
+            System.out.println("║                                        ║");
+            System.out.println("╚════════════════════════════════════════╝");
+            System.out.println("Bienvenido a la iga betPlay, seleccione la opcion de su preferencia. ");
+            Utileria.imprimirOpciones(options);
+            int op = Utileria.validarRango(1, options.length);
+
+            switch (op) {
+                case 1: // Equipos
+                    teamController.run();
+                    break;
+                case 2: // integrantes de equipo
+                    countryController.run();
+                    break;
+                default: // salida
+                    flag = false;
+                    break;
+            }
+        }
     }
 }

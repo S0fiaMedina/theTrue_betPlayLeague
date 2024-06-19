@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Utileria {
-    // metodo para imprimir informes
+   
     @SuppressWarnings("resource")
     public static void mostrarInforme(String mensaje) {
         Scanner scanner = new Scanner(System.in);

@@ -1,6 +1,8 @@
 package com.thetruebetplayleague.country.application.userCases;
 
 
+import java.util.Optional;
+
 import com.thetruebetplayleague.country.domain.model.Country;
 import com.thetruebetplayleague.country.domain.repository.CountryRepository;
 
@@ -13,7 +15,7 @@ public class ChooseACountryUserCase {
     }
 
 
-    public Country findThecountry(int id){
+    public Optional<Country> findThecountry(int id){
         return this.countryRepository.findById(id); //retorna lo que hayo mysql
         
     }

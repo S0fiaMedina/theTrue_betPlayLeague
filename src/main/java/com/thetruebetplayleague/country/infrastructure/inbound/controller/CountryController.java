@@ -22,7 +22,6 @@ public class CountryController {
 
     public void run(){
         List<Country> countries;
-        while (true) {
             int op = countryView.runView();
             if (op == 1){
                 String name = countryView.getName();
@@ -34,12 +33,6 @@ public class CountryController {
                 boolean success = this.countryService.verifyCountry(id);
                 // basicamente un do while mientras esto, devuelve falso para manejar validaciones. con el while ddel main, se remueve los whiles de cada controlador
             }
-            else {
-                break;
-            }
-
-            
-        }
     }
 
     public CountryDTO makeDTO(String name){

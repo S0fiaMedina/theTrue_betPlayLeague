@@ -21,6 +21,7 @@ public class CountryService {
         this.countryRepository = countryRepository;
         this.createCountryUserCase = new CreateCountryUserCase(this.countryRepository);
         this.chooseACountryUserCase = new ChooseACountryUserCase(this.countryRepository);
+        this.getAllAvaibleCountries = new GetAllAvaibleCountries(this.countryRepository);
        
     }
 
@@ -29,7 +30,7 @@ public class CountryService {
     }
 
     public List<Country> getAllCountries(){
-        return getAllAvaibleCountries.getAllCountries();
+        return getAllAvaibleCountries.getTheCountries();
     }
 
     public boolean verifyCountry(int id){

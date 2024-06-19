@@ -13,18 +13,15 @@ import com.thetruebetplayleague.team.domain.model.Team;
 import com.thetruebetplayleague.team.domain.repository.TeamDAO;
 
 public class TeamAdapterMySQL  implements TeamDAO{
+    private String url;
+    private String user;
+    private String pass;
 
 
-    String url = "jdbc:mysql://localhost:3306/betplayLeague";
-    String user = "campus2023";
-    String pass = "campus2023";
 
     
 
-    public TeamAdapterMySQL() {
-    }
-
-    public TeamAdapterMySQL(String url, String user, String password) {
+    public TeamAdapterMySQL(String url, String user, String pass) {
         this.url = url;
         this.user = user;
         this.pass = pass;
@@ -44,6 +41,7 @@ public class TeamAdapterMySQL  implements TeamDAO{
                     teams.add(new Team(id, query));
                     System.out.println("El equipo es: " + id + " " + name);
                 }
+                return teams;
             } 
         } catch (Exception e) {
             System.out.println("se ha producido un error ;(. Motivo: \n");
