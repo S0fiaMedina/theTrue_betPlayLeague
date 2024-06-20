@@ -1,15 +1,16 @@
 package com.thetruebetplayleague.teamMember.adapter.out;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
-import com.thetruebetplayleague.teamMember.infrastructure.TeamMembeRepository;
+import com.thetruebetplayleague.teamMember.infrastructure.TeamMemberRepository;
 
-public class TeamMemberAdapterMySQL implements TeamMembeRepository{
+public class TeamMemberAdapterMySQL implements TeamMemberRepository{
 
     private final String url;
     private final String user;
@@ -30,10 +31,18 @@ public class TeamMemberAdapterMySQL implements TeamMembeRepository{
             try (PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, teamMember.getName());
                 statement.setString(2, teamMember.getLastName());
-                statement.executeUpdate();
+                statement.executeUpdate();  
+
+                // Obtener el id generado
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int id =  generatedKeys.getInt(1); // Devuelve el ID generado
+                    return id;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 }
