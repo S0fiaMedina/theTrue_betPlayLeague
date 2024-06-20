@@ -1,4 +1,4 @@
-package com.thetruebetplayleague.country.domain.repository;
+package com.thetruebetplayleague.country.infrastructure;
 
 import java.util.List;
 import java.util.Optional;

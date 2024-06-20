@@ -1,4 +1,4 @@
-package com.thetruebetplayleague.country.infrastructure.outbound;
+package com.thetruebetplayleague.country.adapters.out;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.thetruebetplayleague.country.domain.model.Country;
-import com.thetruebetplayleague.country.domain.repository.CountryRepository;
+import com.thetruebetplayleague.country.infrastructure.CountryRepository;
 
 
 

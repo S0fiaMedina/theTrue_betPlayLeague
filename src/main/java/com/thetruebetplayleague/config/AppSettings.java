@@ -3,9 +3,10 @@ package com.thetruebetplayleague.config;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.thetruebetplayleague.country.domain.repository.CountryRepository;
-import com.thetruebetplayleague.country.infrastructure.inbound.controller.CountryController;
-import com.thetruebetplayleague.country.infrastructure.outbound.CountryMySQLAdapter;
+
+import com.thetruebetplayleague.country.adapters.out.CountryMySQLAdapter;
+import com.thetruebetplayleague.country.application.CountryService;
+import com.thetruebetplayleague.country.infrastructure.CountryRepository;
 import com.thetruebetplayleague.medicalRol.domain.repository.MedicalRolrepository;
 import com.thetruebetplayleague.medicalRol.infrastructure.inbound.controller.MedicalRolController;
 import com.thetruebetplayleague.medicalRol.infrastructure.outbound.MedicalRolMySQLAdapter;
@@ -17,8 +18,8 @@ import com.thetruebetplayleague.team.infrastructure.outbound.TeamAdapterStatsMyS
 
 public class AppSettings {
     String url = "jdbc:mysql://localhost:3306/betplayLeague";
-    String user = "root";
-    String pass = "R00T_12345";
+    String user = "campus2023";
+    String pass = "campus2023";
 
     public  static void closeConnection(Connection c){
         try {
@@ -37,9 +38,9 @@ public class AppSettings {
         return new TeamController(teamDAO, statsTeamRepository);
     }
 
-    public CountryController startCountryModule(){
+    public CountryService startCountryModule(){
         CountryRepository countryRepository = new CountryMySQLAdapter(this.url, this.user, this.pass);
-        return new CountryController(countryRepository);
+        return new CountryService(countryRepository);
     }
 
     public MedicalRolController startMedicalRolModule(){

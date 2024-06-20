@@ -14,6 +14,6 @@ public class CreateTeamMemberUserCase {
     public void createTeamMember(TeamMemberDTO teamMemberDTO){
         TeamMember teamMember = TeamMemberDTO.toDomainModel(teamMemberDTO);
         System.out.println("Has creado una persona "+ teamMember);
-        //teamMembeRepository.save(teamMember);
+        teamMembeRepository.save(teamMember);
     }
 }

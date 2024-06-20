@@ -1,35 +1,51 @@
 package com.thetruebetplayleague.teamMember.infrastructure.inbound.controller;
 
+import com.thetruebetplayleague.teamMember.application.TeamMemberService;
+import com.thetruebetplayleague.teamMember.application.dto.TeamMemberDTO;
 import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
+import com.thetruebetplayleague.teamMember.domain.repository.TeamMembeRepository;
 import com.thetruebetplayleague.teamMember.infrastructure.inbound.view.TeamMemberView;
 
 public class TeamMemberController {
-    TeamMemberView teamMemberView;
+    private final TeamMemberView teamMemberView;
+    private final TeamMembeRepository teamMembeRepository;
+    private final TeamMemberService teamMemberService;
 
-    public TeamMemberController(){
+    public TeamMemberController(TeamMembeRepository teamMembeRepository){
         teamMemberView = new TeamMemberView();
+        this.teamMembeRepository = teamMembeRepository;
+        this.teamMemberService = new TeamMemberService(teamMembeRepository);
+
     }
 
     public void run(){
         while(true){
             int op = teamMemberView.teamMemberMenu();
             if (op == 1){
-                TeamMember teamMember = new TeamMember();
-                teamMember.setName(teamMember.getName());
-                
-                
-                // manda a su respectivo controlador
-                if (teamMemberDTO.getRol().equals("Jugador")){
+                String name = teamMemberView.getName();
+                String lastName = teamMemberView.getLastName();
+                int idTeam = teamMemberView.getTeamId();
+                int idNacionality = teamMemberView.getNationality();
+                String rol = teamMemberView.getRol();
+                TeamMemberDTO dto = this.makeDTO(0, idTeam, name, lastName, idNacionality, rol);
+                this.teamMemberService.newTeamMember(dto);
 
-                } else if(teamMemberDTO.getRol().equals("Tecnico")){
 
-                } else{
-                    
+                if (rol.equals("Tecnico")){
+
+                } else if (rol.equals("Medico")){
+
+                } else if (rol.equals("Jugador")){
+
                 }
-            } else{
-                break;
             }
         }
-        
     }
+
+
+    public TeamMemberDTO makeDTO(int id, int idTeam, String name, String lastName, int idNacionality, String rol){
+        return new TeamMemberDTO(id, idTeam, name, lastName, idNacionality, rol);
+    }
+
+ 
 }

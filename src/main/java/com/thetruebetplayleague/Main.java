@@ -3,7 +3,7 @@ package com.thetruebetplayleague;
 
 import com.thetruebetplayleague.config.AppSettings;
 import com.thetruebetplayleague.config.Utileria;
-import com.thetruebetplayleague.country.infrastructure.inbound.controller.CountryController;
+import com.thetruebetplayleague.country.adapters.in.controller.CountryController;
 import com.thetruebetplayleague.medicalRol.infrastructure.inbound.controller.MedicalRolController;
 import com.thetruebetplayleague.team.infrastructure.inbound.controller.TeamController;
 
@@ -12,7 +12,6 @@ public class Main {
         // inicializar controladores
         AppSettings appSettings = new AppSettings();
         TeamController teamController = appSettings.startTeamModule();
-        CountryController countryController = appSettings.startCountryModule();
         MedicalRolController medicalRolController = appSettings.startMedicalRolModule();
 
         String[] options = {"Equipos", "Integrantes de equipo", "Tabla de posiciones", "Salir"};

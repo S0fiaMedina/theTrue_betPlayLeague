@@ -33,8 +33,8 @@ public class TeamMemberView {
         return Utileria.getIntInput(">> Digite el id del equipo: ");
     }
 
-    public String  getNationality(){ // que probablemente reciba la consulta de paises para iterar
-        return Utileria.getStringInput(">> Digite la nacionalidad: ");
+    public int  getNationality(){ // que probablemente reciba la consulta de paises para iterar
+        return Utileria.getIntInput(">> Digite la nacionalidad: ");
     }
 
     public String getRol(){

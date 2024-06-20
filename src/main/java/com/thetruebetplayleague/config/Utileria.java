@@ -19,11 +19,8 @@ public class Utileria {
         System.out.println("*************************************\nPresiona Enter para continuar...");
         scanner.nextLine();
     }
-    // metodo para confirmaar
-    public static int confirmacion(String pregunta){
-        System.out.println(pregunta + "\n1. SI\n2. NO");
-        return Utileria.validarRango(1, 2);
-    }
+
+
 
     // recrea el input de python de string
     @SuppressWarnings("resource")

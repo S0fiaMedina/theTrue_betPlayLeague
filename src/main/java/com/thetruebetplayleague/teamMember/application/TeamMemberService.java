@@ -2,7 +2,6 @@ package com.thetruebetplayleague.teamMember.application;
 
 import com.thetruebetplayleague.teamMember.application.dto.TeamMemberDTO;
 import com.thetruebetplayleague.teamMember.application.userCases.CreateTeamMemberUserCase;
-import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
 import com.thetruebetplayleague.teamMember.domain.repository.TeamMembeRepository;
 
 public class TeamMemberService {
@@ -20,6 +19,7 @@ public class TeamMemberService {
     public void newTeamMember(TeamMemberDTO teamMemberDTO){
         this.createTeamMemberUserCase.createTeamMember(teamMemberDTO);
     }
+
 
     
 }
