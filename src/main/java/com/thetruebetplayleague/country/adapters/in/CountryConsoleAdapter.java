@@ -31,8 +31,8 @@ public class CountryConsoleAdapter {
         //agrergar pais
         if (choice == 1){
             String name = Utileria.getStringInput(">> Escribe el nombre del nuevo pais");
-            Country newCountry = new Country(0,name);
-            countryService.newCountry(newCountry);
+            int generatedId = countryService.newCountry(new Country(0,name));
+            System.out.println("Has creado al pais :"+  name +" cuyo id es " + generatedId );
 
         
         } else if (choice == 2){ // mostrar paises

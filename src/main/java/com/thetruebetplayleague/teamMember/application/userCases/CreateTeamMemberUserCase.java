@@ -1,8 +1,6 @@
 package com.thetruebetplayleague.teamMember.application.userCases;
-
-import com.thetruebetplayleague.teamMember.application.dto.TeamMemberDTO;
 import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
-import com.thetruebetplayleague.teamMember.domain.repository.TeamMembeRepository;
+import com.thetruebetplayleague.teamMember.infrastructure.TeamMembeRepository;
 
 public class CreateTeamMemberUserCase {
     private final TeamMembeRepository teamMembeRepository;

@@ -1,27 +1,27 @@
 package com.thetruebetplayleague.team.application;
 
-import com.thetruebetplayleague.team.application.dto.TeamDTO;
+import java.util.Optional;
+
+
 import com.thetruebetplayleague.team.application.userCases.CreateNewTeamUserCase;
 import com.thetruebetplayleague.team.domain.model.Team;
-import com.thetruebetplayleague.team.domain.repository.StatsTeamRepository;
-import com.thetruebetplayleague.team.domain.repository.TeamDAO;
+import com.thetruebetplayleague.team.infrastructure.StatsTeamRepository;
+import com.thetruebetplayleague.team.infrastructure.TeamRepository;
 
 public class TeamService {
-    private final TeamDAO teamRepository;
+    private final TeamRepository teamRepository;
     private final StatsTeamRepository statsManager;
-    private TeamDTO teamDTO;
-
-    private CreateNewTeamUserCase createNewTeamUserCase;
+    private final CreateNewTeamUserCase createNewTeamUserCase;
     
-    public TeamService(TeamDAO teamDAO, StatsTeamRepository statsManager){
+    public TeamService(TeamRepository teamDAO, StatsTeamRepository statsManager){
         this.teamRepository = teamDAO;
         this.statsManager = statsManager;
         this.createNewTeamUserCase = new CreateNewTeamUserCase(this.teamRepository);
 
     }
 
-    public void createNewTeam(TeamDTO teamDTO){
-        createNewTeamUserCase.createTeam(teamDTO);
+    public void createNewTeam(Team team){
+        createNewTeamUserCase.createTeam(team);
     }
 
     // informes
@@ -48,22 +48,9 @@ public class TeamService {
 
 
     //getters y setters
-    public TeamDAO getTeamRepository() {
+    public TeamRepository getTeamRepository() {
         return teamRepository;
     }
-
-    public TeamDTO getTeamDTO() {
-        return teamDTO;
-    }
-
-    public void setTeamDTO(TeamDTO teamDTO) {
-        this.teamDTO = teamDTO;
-    }
-
-
-
-    
-
 
 
 }

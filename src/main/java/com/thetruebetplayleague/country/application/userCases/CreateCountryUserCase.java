@@ -10,8 +10,7 @@ public class CreateCountryUserCase {
         this.countryRepository = countryRepository;
     }
 
-    public void createNewCountry(Country country){
-        System.out.println("Has creado un pais cuyo nombre es: " + country.getName());
-        countryRepository.save(country);
+    public int createNewCountry(Country country){
+        return countryRepository.save(country);
     }
 }

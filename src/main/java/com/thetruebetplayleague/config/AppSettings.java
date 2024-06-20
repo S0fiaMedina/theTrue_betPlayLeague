@@ -3,18 +3,20 @@ package com.thetruebetplayleague.config;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
+import com.thetruebetplayleague.country.adapters.in.CountryConsoleAdapter;
 import com.thetruebetplayleague.country.adapters.out.CountryMySQLAdapter;
 import com.thetruebetplayleague.country.application.CountryService;
 import com.thetruebetplayleague.country.infrastructure.CountryRepository;
 import com.thetruebetplayleague.medicalRol.domain.repository.MedicalRolrepository;
 import com.thetruebetplayleague.medicalRol.infrastructure.inbound.controller.MedicalRolController;
 import com.thetruebetplayleague.medicalRol.infrastructure.outbound.MedicalRolMySQLAdapter;
-import com.thetruebetplayleague.team.domain.repository.StatsTeamRepository;
-import com.thetruebetplayleague.team.domain.repository.TeamDAO;
-import com.thetruebetplayleague.team.infrastructure.inbound.controller.TeamController;
-import com.thetruebetplayleague.team.infrastructure.outbound.TeamAdapterMySQL;
-import com.thetruebetplayleague.team.infrastructure.outbound.TeamAdapterStatsMySQL;
+import com.thetruebetplayleague.team.adapters.in.TeamConsoleAdapter;
+import com.thetruebetplayleague.team.adapters.out.TeamAdapterMySQL;
+import com.thetruebetplayleague.team.adapters.out.TeamAdapterStatsMySQL;
+import com.thetruebetplayleague.team.application.TeamService;
+import com.thetruebetplayleague.team.infrastructure.StatsTeamRepository;
+import com.thetruebetplayleague.team.infrastructure.TeamRepository;
+
 
 public class AppSettings {
     String url = "jdbc:mysql://localhost:3306/betplayLeague";
@@ -32,15 +34,17 @@ public class AppSettings {
         
     
 
-    public   TeamController startTeamModule(){
-        TeamDAO teamDAO = new TeamAdapterMySQL(this.url, this.user, this.pass);
+    public   TeamConsoleAdapter startTeamModule(){
+        TeamRepository teamRepository = new TeamAdapterMySQL(this.url, this.user, this.pass);
         StatsTeamRepository statsTeamRepository = new TeamAdapterStatsMySQL( this.url, this.user, this.pass);
-        return new TeamController(teamDAO, statsTeamRepository);
+        TeamService teamService = new TeamService(teamRepository, statsTeamRepository);
+        return new TeamConsoleAdapter(teamService);
     }
 
-    public CountryService startCountryModule(){
+    public CountryConsoleAdapter startCountryModule(){
         CountryRepository countryRepository = new CountryMySQLAdapter(this.url, this.user, this.pass);
-        return new CountryService(countryRepository);
+        CountryService countryService = new CountryService(countryRepository);
+        return new CountryConsoleAdapter(countryService);
     }
 
     public MedicalRolController startMedicalRolModule(){

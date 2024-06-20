@@ -1,10 +1,12 @@
 package com.thetruebetplayleague.country.adapters.out;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -73,15 +75,26 @@ public class CountryMySQLAdapter implements CountryRepository{
     }
 
     @Override
-    public void save(Country country) {
+    public int save(Country country) {
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
             String query = "INSERT INTO country (name) VALUES (?)";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
+            try (PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, country.getName());
                 statement.executeUpdate();
+
+                // Obtener el id generado
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int id =  generatedKeys.getInt(1); // Devuelve el ID generado
+                    return id;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
+
+
+
 }

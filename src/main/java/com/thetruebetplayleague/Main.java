@@ -5,7 +5,7 @@ import com.thetruebetplayleague.config.AppSettings;
 import com.thetruebetplayleague.config.Utileria;
 import com.thetruebetplayleague.country.adapters.in.controller.CountryController;
 import com.thetruebetplayleague.medicalRol.infrastructure.inbound.controller.MedicalRolController;
-import com.thetruebetplayleague.team.infrastructure.inbound.controller.TeamController;
+import com.thetruebetplayleague.team.adapters.in.controller.TeamController;
 
 public class Main {
     public static void main(String[] args) {

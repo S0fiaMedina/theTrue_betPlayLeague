@@ -10,5 +10,5 @@ public interface CountryRepository {
 
     public List<Country> findAll();
 
-    public void save(Country country);
+    public int save(Country country);
 }

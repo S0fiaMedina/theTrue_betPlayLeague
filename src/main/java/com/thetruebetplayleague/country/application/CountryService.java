@@ -19,8 +19,8 @@ public class CountryService {
        
     }
 
-    public void newCountry(Country country){
-        createCountryUserCase.createNewCountry(country);
+    public int newCountry(Country country){
+        return createCountryUserCase.createNewCountry(country);
     }
 
     public List<Country> getAllCountries(){
