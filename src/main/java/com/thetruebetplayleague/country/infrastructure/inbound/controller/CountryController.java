@@ -31,7 +31,7 @@ public class CountryController {
                 countries = this.countryService.getAllCountries();
                 int id = countryView.chooseCountry(countries);
                 boolean success = this.countryService.verifyCountry(id);
-                // basicamente un do while mientras esto, devuelve falso para manejar validaciones. con el while ddel main, se remueve los whiles de cada controlador
+               
             }
     }
 

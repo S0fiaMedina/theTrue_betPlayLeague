@@ -1,5 +1,6 @@
 package com.thetruebetplayleague.teamMember.infrastructure.inbound.controller;
 
+import com.thetruebetplayleague.teamMember.domain.model.TeamMember;
 import com.thetruebetplayleague.teamMember.infrastructure.inbound.view.TeamMemberView;
 
 public class TeamMemberController {
@@ -13,7 +14,9 @@ public class TeamMemberController {
         while(true){
             int op = teamMemberView.teamMemberMenu();
             if (op == 1){
-               TeamMemberDTO teamMemberDTO = teamMemberView.getDataOfTeamMember(); //  obtiene todos los datos y los recibe enn froma de dto
+                TeamMember teamMember = new TeamMember();
+                teamMember.setName(teamMember.getName());
+                
                 
                 // manda a su respectivo controlador
                 if (teamMemberDTO.getRol().equals("Jugador")){

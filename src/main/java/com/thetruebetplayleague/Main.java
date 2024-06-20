@@ -4,6 +4,7 @@ package com.thetruebetplayleague;
 import com.thetruebetplayleague.config.AppSettings;
 import com.thetruebetplayleague.config.Utileria;
 import com.thetruebetplayleague.country.infrastructure.inbound.controller.CountryController;
+import com.thetruebetplayleague.medicalRol.infrastructure.inbound.controller.MedicalRolController;
 import com.thetruebetplayleague.team.infrastructure.inbound.controller.TeamController;
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
         AppSettings appSettings = new AppSettings();
         TeamController teamController = appSettings.startTeamModule();
         CountryController countryController = appSettings.startCountryModule();
+        MedicalRolController medicalRolController = appSettings.startMedicalRolModule();
 
         String[] options = {"Equipos", "Integrantes de equipo", "Tabla de posiciones", "Salir"};
         boolean flag = true;
@@ -31,7 +33,7 @@ public class Main {
                     teamController.run();
                     break;
                 case 2: // integrantes de equipo
-                    countryController.run();
+                    medicalRolController.run();
                     break;
                 default: // salida
                     flag = false;

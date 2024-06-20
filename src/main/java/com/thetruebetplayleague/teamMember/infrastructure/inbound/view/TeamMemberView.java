@@ -25,6 +25,10 @@ public class TeamMemberView {
         return Utileria.getStringInput(">> Digite el nombre de la persona: ");
     }
 
+    public String getLastName(){
+        return Utileria.getStringInput(">> Digite el apellido de la persona: ");
+    }
+
     public int getTeamId(){ // que probablemente reciba la consulta de equipos para iterar
         return Utileria.getIntInput(">> Digite el id del equipo: ");
     }
@@ -32,14 +36,16 @@ public class TeamMemberView {
     public String  getNationality(){ // que probablemente reciba la consulta de paises para iterar
         return Utileria.getStringInput(">> Digite la nacionalidad: ");
     }
-        
-    
 
-
-    public TeamMemberDTO makeDTO(String name, String nationality, int teamId, int rol){
-        String TeamRol = roles[rol - 1]; // obtiene el nombre del rol
-        return new TeamMemberDTO(name, nationality, TeamRol);
+    public String getRol(){
+        Utileria.imprimirOpciones(roles);
+        System.out.println("Selecciona el rol que va a tener la persona");
+        int opRol =  Utileria.validarRango(1, roles.length);
+        System.out.println("Has escogido " + roles[opRol - 1]);
+        return roles[opRol -1 ];
 
     }
+        
+    
 
 }
