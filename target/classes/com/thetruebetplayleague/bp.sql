@@ -16,6 +16,13 @@ CREATE TABLE IF NOT EXISTS city(
 	FOREIGN KEY(country_id) REFERENCES country(id)
 );
 
+CREATE TABLE stadium(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR NOT NULL,
+	id_city INT NOT NULL,
+	capacity INT NOT NULL,
+	FOREIGN KEY(id_city) REFERENCES city(id),
+) ;
 
 -- EQUIPO
 
@@ -100,19 +107,21 @@ CREATE TABLE IF NOT EXISTS game(
 
 
 CREATE TABLE IF NOT EXISTS team_game(
-	team_id INT NOT NULL PRIMARY KEY,
-	game_id INT NOT NULL PRIMARY KEY,
+	team_id INT NOT NULL,
+	game_id INT NOT NULL,
 	goals INT DEFAULT 0,
 	is_local BOOL NOT NULL,
+	PRIMARY KEY(team_id, game_id),
 	FOREIGN KEY(team_id) REFERENCES team(id),
 	FOREIGN KEY(game_id) REFERENCES game(id)
 ) ENGINE =  INNODB;
 
 
 CREATE TABLE IF NOT EXISTS goal(
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	player_id INT NOT NULL,
 	game_id INT NOT NULL,
-	minute INT NOT NULL,
+	goal_minute INT NOT NULL,
 	FOREIGN KEY(player_id) REFERENCES player(id),
 	FOREIGN KEY(game_id) REFERENCES team(id)
 ) ENGINE = INNODB;

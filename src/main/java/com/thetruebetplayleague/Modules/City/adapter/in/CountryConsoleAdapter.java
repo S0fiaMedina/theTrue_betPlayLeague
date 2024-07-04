@@ -1,4 +1,4 @@
-package com.thetruebetplayleague.Modules.Country.adapter.in;
+package com.thetruebetplayleague.Modules.City.adapter.in;
 
 
 import java.util.List;
@@ -12,16 +12,16 @@ public class CountryConsoleAdapter {
 
     String header = """
             ++++++++++++++++++++++++++
-                    PAISES
+                    CIUDADES    
             ++++++++++++++++++++++++++
             """;
     private CountryService countryService;
     String[] options = {
-        "1. Crear pais",
-        "2. Actualizar pais",
-        "3. Buscar pais",
-        "4. Eliminar paises",
-        "5. Listar paises"
+        "1. Crear ciudad",
+        "2. Actualizar ciudad",
+        "3. Buscar ciudad",
+        "4. Eliminar ciudades",
+        "5. Listar ciudades"
     };
 
     public CountryConsoleAdapter(CountryService countryService) {
