@@ -11,7 +11,9 @@ public class Main {
         String url = "jdbc:mysql://localhost:3306/liga_betplay";
         String user = "root";
         String password = "R00T_12345";
-        Initializer initializer = new Initializer(url, user, password);
+
+        Initializer initializer = Initializer.getInstance(url, user, password);
+        
 
         CountryConsoleAdapter countryConsoleAdapter = initializer.startCountryModule();
         CityConsoleAdapter cityConsoleAdapter = initializer.startCityModule();

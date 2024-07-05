@@ -18,11 +18,17 @@ public class Initializer {
     private String user;
     private String password;
 
+    private static  Initializer myInitializer = null; // variable estatica para singleton
+
+    // repositorios
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
     private final StadiumRepository stadiumRepository;
 
-    public Initializer(String url, String user, String password){
+
+
+    // constructor privado
+    private Initializer(String url, String user, String password){
         this.url = url;
         this.user = user;
         this.password = password;
@@ -31,19 +37,60 @@ public class Initializer {
         this.stadiumRepository = new StadiumMySQLRepository(url, user, password);
     }
 
+    // aplicacion singleton
+    public static Initializer getInstance(String url, String user, String password){
+        if (myInitializer == null){ // aqui solo restorna la instancia si se la primera es null, NO SE DECLARA OTRA
+            myInitializer = new Initializer(url, user, password);
+        }
+        return myInitializer;
+    }
 
+
+
+
+    // paises
     public CountryConsoleAdapter startCountryModule(){
         CountryService countryService = new CountryService(this.countryRepository);
         return new CountryConsoleAdapter(countryService);
     }
 
+    // ciudades
     public CityConsoleAdapter startCityModule(){
         CityService cityService = new CityService(this.cityRepository, this.countryRepository);
         return new CityConsoleAdapter(cityService);
     }
 
+    // estadios
     public StadiumConsoleAdapter startStadiumModule(){
         StadiumService stadiumService = new StadiumService(stadiumRepository, cityRepository);
         return new StadiumConsoleAdapter(stadiumService);
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
+    
 }

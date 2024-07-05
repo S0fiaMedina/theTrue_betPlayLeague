@@ -1,4 +1,4 @@
-package com.thetruebetplayleague.Modules.stadium.adapter.out;
+package com.thetruebetplayleague.Modules.team.adapter.out;
 
 
 import java.sql.Connection;
@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
-import com.thetruebetplayleague.Modules.stadium.domain.Stadium;
-import com.thetruebetplayleague.Modules.stadium.infrastructure.StadiumRepository;
+import com.thetruebetplayleague.Modules.team.domain.Team;
+import com.thetruebetplayleague.Modules.team.infrastructure.TeamRepository;
 import com.thetruebetplayleague.console.Util;
 
-public class StadiumMySQLRepository implements StadiumRepository{
+public class TeamMySQLRepository implements TeamRepository{
 
     private String url;
     private String user;
@@ -23,59 +22,70 @@ public class StadiumMySQLRepository implements StadiumRepository{
 
     
 
-    public StadiumMySQLRepository(String url, String user, String password) {
+    public TeamMySQLRepository(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
     }
 
     @Override
-    public List<Stadium> findAll() {
-        List<Stadium> Stadiums = new ArrayList<>();
+    public List<Team> findAll() {
+        List<Team> teams = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)){
             
-            String query = "SELECT id, name, id_city, capacity FROM stadium;";
+            String query = "SELECT * FROM team;";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 ResultSet resultSet = statement.executeQuery();
 
                 while(resultSet.next()){
-                    Stadium stadium = new Stadium(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getInt("id_city"),
-                        resultSet.getInt("capacity")
-                    );
-                    Stadiums.add(stadium);
+                    Team team = new Team();
+
+                    team.setId( resultSet.getInt("id"));
+                    team.setName( resultSet.getString("name"));
+                    team.setPlayedGames( resultSet.getInt("played_games"));
+                    team.setWonGames( resultSet.getInt("won_games"));
+                    team.setLostGames( resultSet.getInt("lost_games"));
+                    team.setTiedGames( resultSet.getInt("tied_games"));
+                    team.setScoredGoals( resultSet.getInt("scored_goals"));
+                    team.setGoalsConceded(resultSet.getInt("goals_conceded"));
+                    team.setTotalOfPoints(resultSet.getInt("total_of_Points"));
+                    teams.add(team);
                 }
                 
                 
             }
         } catch (Exception e) {
-            System.out.println(">> Se ha producido un error: " +  e.getMessage());
+            System.out.println(">> Se ha producido un error. Motivo: " + e.getMessage());
         }
-        return Stadiums;
+        return teams;
     }
 
     @Override
-    public Optional<Stadium> findById(int id) {
+    public Optional<Team> findById(int id) {
         try(Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "SELECT id, name, id_city, capacity FROM stadium WHERE id = ?";
+            String query = "SELECT * FROM team WHERE id = ?";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 // ejecutar
                 statement.setInt(1, id);
                 ResultSet rs = statement.executeQuery();
 
                 // crea pais
-                Stadium stadium = new Stadium();
+                Team team = new Team();
                 while (rs.next()){
-                    stadium = new Stadium(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("id_city"),
-                        rs.getInt("capacity")
-                    );
+                    team =new Team();
+
+                    team.setId( rs.getInt("id"));
+                    team.setName( rs.getString("name"));
+                    team.setPlayedGames( rs.getInt("played_games"));
+                    team.setWonGames( rs.getInt("won_games"));
+                    team.setLostGames( rs.getInt("lost_games"));
+                    team.setTiedGames( rs.getInt("tied_games"));
+                    team.setScoredGoals( rs.getInt("scored_goals"));
+                    team.setGoalsConceded(rs.getInt("goals_conceded"));
+                    team.setTotalOfPoints(rs.getInt("total_of_Points"));
+
                 }
-                return Optional.of(stadium);
+                return Optional.of(team);
             }
 
         } catch(Exception e){
@@ -86,34 +96,30 @@ public class StadiumMySQLRepository implements StadiumRepository{
     }
 
     @Override
-    public void update(Stadium stadium) {
+    public void update(Team team) {
         try (Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "UPDATE stadium SET name = ?, capacity = ? WHERE id = ?";
+            String query = "UPDATE team SET name = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)){
-                statement.setString(1, stadium.getName());
-                statement.setInt(2, stadium.getCapacity());
-                statement.setInt(3, stadium.getId());
+                statement.setString(1, team.getName());
+                statement.setInt(2, team.getId());
                 statement.executeUpdate();
                 
                 Util.showASign("PROCESO EXITOSO", "Actualizacion realizada");
             }
         } catch (Exception e) {
-            System.out.println(">> Ha ocurrido un error\n>> Motivo " + e.getMessage());
+            System.out.println(">> Se ha producido un error. Motivo: " + e.getMessage());
         }
         
     }
 
     @Override
-    public void save(Stadium stadium) {
+    public void save(Team team) {
         try (Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "INSERT INTO stadium(name, id_city, capacity) VALUES (?, ?, ?)";
+            String query = "INSERT INTO team(name) VALUES (?)";
             try(PreparedStatement statement = connection.prepareStatement(query)){
-                statement.setString(1, stadium.getName());
-                statement.setInt(2, stadium.getIdCity());
-                statement.setInt(3, stadium.getCapacity());
-    
+                statement.setString(1, team.getName());
                 statement.executeUpdate();
-                Util.showASign("PROCESO EXITOSO", "La ciudad se ha registrado correctamente");
+                Util.showASign("PROCESO EXITOSO", "El pais se ha registrado correctamente");
             }
         } catch (Exception e) {
             Util.showASign("ERROR", "Ha ocurrido un error con la base de datos");
@@ -125,18 +131,20 @@ public class StadiumMySQLRepository implements StadiumRepository{
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)){
-            String query = "DELETE FROM stadium WHERE id = ?";
+            String query = "DELETE FROM team WHERE id = ?";
             try(PreparedStatement statement = connection.prepareStatement(query)){
                 statement.setInt(1, id);
                 statement.executeUpdate();
                 Util.showASign("PROCESO EXITOSO", "Informacion eliminada");
             }
+        
         } catch (SQLIntegrityConstraintViolationException e){
-            Util.showASign("ADVERTENCIA", "No se puede eliminar una ciudad que tenga informacion asociada");
-        } catch (Exception e) {
+            Util.showASign("ADVERTENCIA", "No se puede eliminar paises que tengan informacion relacionada. ");
+        }
+         catch (Exception e) {
             System.out.println("Lo siento, se ha producido un error. Motivo: " + e.getMessage());
         }
-        
     }
+
     
 }

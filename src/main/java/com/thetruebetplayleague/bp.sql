@@ -29,7 +29,7 @@ CREATE TABLE stadium(
 CREATE TABLE IF NOT EXISTS team (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    playe_games INT DEFAULT 0,
+    played_games INT DEFAULT 0,
     won_games INT DEFAULT 0,
     lost_games INT DEFAULT 0,
     tied_games INT DEFAULT 0,

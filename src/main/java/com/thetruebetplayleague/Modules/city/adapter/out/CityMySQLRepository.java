@@ -1,7 +1,5 @@
 package com.thetruebetplayleague.Modules.city.adapter.out;
 
-import java.beans.Statement;
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
