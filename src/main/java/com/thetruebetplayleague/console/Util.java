@@ -59,9 +59,10 @@ public class Util {
     public static int rangeValidator(int minNumber, int maxNumber){
         Scanner sc = new Scanner(System.in);
         System.out.println(">> Escoja la opcion de su preferencia");
-        String input = sc.nextLine().trim();
+        
         while(true){
             try {
+                String input = sc.nextLine().trim();
                 int num = Integer.parseInt(input);
 
                 if (num >= minNumber || num<= maxNumber){
@@ -70,7 +71,7 @@ public class Util {
                     System.out.println(">> !ERROR: Debe ingresar un numero que se encuentre dentro del rango. Intente de nuevo");
                 }
             } catch (NumberFormatException e) {
-                System.out.println(">> !ERROR: Numero fuera de rango. Intente de nuevo: ");
+                System.out.println(">> !ERROR: Debes ingresar un numero: ");
             }
         }
     }
